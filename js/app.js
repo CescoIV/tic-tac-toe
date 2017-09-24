@@ -32,10 +32,9 @@ function setPlayer(box, event){
 		//Make the box background the player's img
 		//check who player is, then switch to 'o' or 'x' player(pass the turn)
 		box.style.backgroundImage = player;
-		
+		playSound(player);
 		if(hasWon(player)){
-			console.log('ayylmao');
-			fillSkull()
+			fillSkull();
 		}
 		player === x ? player = o : player = x;
 		setText(player);
@@ -74,7 +73,9 @@ function setText(player, won = false){
 function hasWon(player){
 	for(var i=0;i<3;i++){
 		var horizontal = checkHor(i,player);
-		if(horizontal){
+		var vertical = checkVer(i,player);
+		var diag = checkDiagUp(player) || checkDiagDown(player);
+		if(horizontal || vertical || diag){
 			console.log('ayylmao');
 			return true;
 		}	
@@ -90,4 +91,42 @@ function checkHor(index,player){
 		return true;
 	}
 	return false;
+}
+function checkVer(index,player){
+	index === 1 ? index +=2 : index;
+	index === 2 ? index +=4 : index;
+	var first = boxes[index].style.backgroundImage;
+	var second = boxes[index+1].style.backgroundImage;
+	var third = boxes[index+2].style.backgroundImage;
+
+	if(first === player && second === player && third === player){
+		return true;
+	}
+	return false;
+}
+function checkDiagUp(player){
+	var up = [0,4,8];
+
+	for(var i=0; i<3;i++){
+		if(boxes[up[i]].style.backgroundImage != player){
+			return false;
+		}
+	}
+	return true;
+}
+
+function checkDiagDown(player){
+	var down = [2,4,6];
+	for(var i=0; i<3;i++){
+		if(boxes[down[i]].style.backgroundImage != player){
+			return false;
+		}
+	}
+	return true;
+}
+
+function playSound(player){
+	var audio = '';
+	player === x ? audio = document.querySelector('#sword') : audio = document.querySelector('#cannon');
+	audio.play();
 }
