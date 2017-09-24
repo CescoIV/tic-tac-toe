@@ -1,8 +1,17 @@
-#board {
-  margin-top: 10px;
+.board{
+	width: 600px;
+	height: 600px;
+	display: flex;
+	flex-direction: row;
+	margin: auto;
 }
-
-.box {
-  border: 1px solid black;
-  height: 150px;
+.row{
+	flex: 1;
+}
+.box{
+	width: 200px;
+	height: 200px;
+	background-color: red;
+	margin: 2px;
+	background-image: "";
 }
