@@ -6,16 +6,25 @@
 </head>
 <body>
   <h1>Hoist the Black Flag!</h1>
-  <h2 class="turn-message">Swords up Lads!</h2>
+  <div class="textholder">
+    <h2 class="turn-message">Swords up Lads!</h2>
+  </div>
   <h2 class="scoreboard">
-    <img src="images/swords.png">
-    <div class="swords">0</div>
-    <img src="images/cannonballs.png">
-    <div class="cannon">0</div>
+    <div class="s_score">
+      <img class="score" src="images/swords.png">
+      <div class="swords score num">0</div>
+    </div>
+    <div class="o_score">
+      <img class="score" src="images/cannonballs.png">
+      <div class="cannon score num">0</div>
+    </div>
   </h2>
-  <h3></h3>
+  <div class="textholder">
+    <h2 class="winner">...</h2>
+  </div>
 
   <section class="board">
+    <button class="start">START</button>
     <section class="row">
       <div class="box" id="0"></div>
       <div class="box" id="1"></div>
@@ -32,8 +41,8 @@
       <div class="box" id="8"></div>      
     </section>
   </section>
-
-  <button class="start">START</button>
+  <h3>...</h3>
+  
   <img class="reset" src="images/temp_reset.jpg">
   <audio id="sword" src="sfx/sword.mp3"></audio>
   <audio id="cannon" src="sfx/cannon.mp3"></audio>

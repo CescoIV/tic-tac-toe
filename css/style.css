@@ -1,12 +1,23 @@
+body{
+/*	margin: 0 auto;*/
+}
+h1, h2, h3{
+	margin: 0;
+	text-align: center;
+}
+h1{
+	margin: 20px 0;
+}
 .board{
 	width: 600px;
 	height: 600px;
 	display: flex;
 	flex-direction: row;
-	margin: auto;
+	margin: 30px auto;
 }
 .row{
 	flex: 1;
+	display: none;
 }
 .box{
 	width: 200px;
@@ -17,4 +28,27 @@
 }
 .reset{
 	display: none;
+	margin: 0 auto;
+	height: 50px;
+}
+.start{
+	margin: auto;
+}
+.scoreboard{
+	width: 70px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+}
+.s_score, .o_score{
+	flex:1;
+}
+.num{
+	font-size: 40px;
+	width: 50px;
+}
+img.score{
+
+	width: 50px;
+	height: 50px;
 }

@@ -8,18 +8,25 @@ var skull = 'url("images/skull.jpg")'
 var player = x;
 var boxes = [...document.querySelectorAll('.box')];
 var res_button = document.querySelector('.reset')
+var start_button = document.querySelector('.start');
+
+start_button.addEventListener('click', start);
+
 res_button.addEventListener('click', function reset(){
 	boxes.forEach((el)=>{
 		el.style.backgroundImage='';
 	})
-	document.querySelector('h3').innerHTML = '';
+	document.querySelector('.winner').innerHTML = '...';
+	document.querySelector('h3').innerHTML = '...';
 	res_button.style.display = 'none';
 });
 
 function start(){
 	var rows = [...document.querySelectorAll('.row')];
 	
+	start_button.style.display = 'none';
 	rows.forEach((el)=>{
+		el.style.display = 'block';
 		el.addEventListener('click',function onClick(event){
 			//if click on row AND div inside row, block gets executed
 			if(event.target && event.target.nodeName == 'DIV'){
@@ -45,6 +52,7 @@ function setPlayer(box, event){
 		if(hasWon(player)){
 			fillSkull();
 			updateBoard(player);
+			displayWinner(player);
 		}
 		player === x ? player = o : player = x;
 		setText(player);
@@ -52,7 +60,10 @@ function setPlayer(box, event){
 	}
 	if(isFull()){
 		event.preventDefault();
-		msg.innerText = "Reset the game you Landlubber!"
+		document.querySelector('.winner').innerHTML =
+			"Draw! And here I thought y' was worth me trouble!"
+		msg.innerText = "Reset the game you Landlubber!";
+		res_button.style.display = "block";
 	}
 }
 function fillSkull(){
@@ -90,6 +101,7 @@ function hasWon(player){
 			return true;
 		}	
 	}
+	return false;
 }
 
 function checkHor(index,player){
@@ -140,7 +152,15 @@ function playSound(player){
 	player === x ? audio = document.querySelector('#sword') : audio = document.querySelector('#cannon');
 	audio.play();
 }
-
+function displayWinner(player){
+	if(player === x){
+		document.querySelector('.winner').innerHTML =
+		 "Swords win! looks like yer all out of gunpowder!";
+	}else{
+		document.querySelector('.winner').innerHTML =
+		 "Cannon victory! Not so sharp eh? bringing swords to a gunfight!";
+	}
+}
 function updateBoard(player){
 	player === x ? x_score +=1 : o_score +=1;
 	res_button.style.display = 'block';
