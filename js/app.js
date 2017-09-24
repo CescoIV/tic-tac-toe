@@ -1,11 +1,20 @@
 // var a = [...document.querySelectorAll('.row')];
 
-
+var x_score = 0;
+var o_score = 0;
 var x = 'url("images/swords.png")';
 var o = 'url("images/cannonballs.png")';
 var skull = 'url("images/skull.jpg")'
 var player = x;
 var boxes = [...document.querySelectorAll('.box')];
+var res_button = document.querySelector('.reset')
+res_button.addEventListener('click', function reset(){
+	boxes.forEach((el)=>{
+		el.style.backgroundImage='';
+	})
+	document.querySelector('h3').innerHTML = '';
+	res_button.style.display = 'none';
+});
 
 function start(){
 	var rows = [...document.querySelectorAll('.row')];
@@ -35,6 +44,7 @@ function setPlayer(box, event){
 		playSound(player);
 		if(hasWon(player)){
 			fillSkull();
+			updateBoard(player);
 		}
 		player === x ? player = o : player = x;
 		setText(player);
@@ -61,7 +71,7 @@ function isFull(){
 	return true;
 }
 
-function setText(player, won = false){
+function setText(player){
 	var msg = document.querySelector('h2');
 	if(player === x){
 		msg.innerText = "Swords up Lads!";
@@ -129,4 +139,11 @@ function playSound(player){
 	var audio = '';
 	player === x ? audio = document.querySelector('#sword') : audio = document.querySelector('#cannon');
 	audio.play();
+}
+
+function updateBoard(player){
+	player === x ? x_score +=1 : o_score +=1;
+	res_button.style.display = 'block';
+	document.querySelector('.cannon').innerHTML = o_score;
+	document.querySelector('.swords').innerHTML = x_score;
 }
