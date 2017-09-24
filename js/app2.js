@@ -3,28 +3,25 @@
 
 var x = 'url("images/swords.png")';
 var o = 'url("images/cannonballs.png")';
-var skull = 'url("images/skull.jpg")'
 var player = x;
-var boxes = [...document.querySelectorAll('.box')];
 
 function start(){
-	var rows = [...document.querySelectorAll('.row')];
+	var boxes = [...document.querySelectorAll('.box')];
 	
-	rows.forEach((el)=>{
-		el.addEventListener('click',function onClick(event){
-			//if click on row AND div inside row, block gets executed
-			if(event.target && event.target.nodeName == 'DIV'){
-				setPlayer(event.target,event)
-			}
-		})
+	boxes.forEach((el)=>{
+		el.addEventListener('click',onClick(event))
+			// setPlayer(el,event);
 	})
+}
+
+function onClick(i){
+	setPlayer(this,i);
 }
 
 function setPlayer(box, event){
 	var msg = document.querySelector('h3');
 
 	//if box has been marked, raise alert
-
 	if(box.style.backgroundImage != ''){
 		event.preventDefault();
 		msg.innerText ="Click an empty spot matey!"
@@ -35,31 +32,12 @@ function setPlayer(box, event){
 		
 		if(hasWon(player)){
 			console.log('ayylmao');
-			fillSkull()
+			return true;
 		}
 		player === x ? player = o : player = x;
 		setText(player);
 		msg.innerText = '';	
 	}
-	if(isFull()){
-		event.preventDefault();
-		msg.innerText = "Reset the game you Landlubber!"
-	}
-}
-function fillSkull(){
-	boxes.forEach((el)=>{
-		if(el.style.backgroundImage === ''){
-			el.style.backgroundImage = skull;
-		}
-	})
-}
-function isFull(){
-	for(var i=0;i<boxes.length;i++){
-		if(boxes[i].style.backgroundImage === ''){
-			return false;
-		}
-	}
-	return true;
 }
 
 function setText(player, won = false){
@@ -72,16 +50,19 @@ function setText(player, won = false){
 }
 
 function hasWon(player){
+	var boxes = [...document.querySelectorAll('.box')];
+
 	for(var i=0;i<3;i++){
-		var horizontal = checkHor(i,player);
+		var horizontal = checkHor(i,boxes,player);
 		if(horizontal){
-			console.log('ayylmao');
 			return true;
+		}else{
+			return false;
 		}	
 	}
 }
 
-function checkHor(index,player){
+function checkHor(index,boxes,player){
 	var first = boxes[index].style.backgroundImage;
 	var second = boxes[index+3].style.backgroundImage;
 	var third = boxes[index+6].style.backgroundImage;
