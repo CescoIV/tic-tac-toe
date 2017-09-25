@@ -8,11 +8,13 @@ var boxes = [...document.querySelectorAll('.box')];
 var res_button = document.querySelector('.reset')
 var start_button = document.querySelector('.start');
 var audio = document.querySelector('#intro');
+var cannon_count = 0;
+var sword_count = 0;
 
 window.onload = bgAudStart();
 start_button.addEventListener('click', start);
 
-res_button.addEventListener('click', function reset(){
+res_button.addEventListener('click', function hard_reset(){
 	boxes.forEach((el)=>{
 		el.style.backgroundImage='';
 	})
@@ -39,6 +41,7 @@ function start(){
 }
 
 function setPlayer(box, event){
+	var rand = Math.random();
 	var msg = document.querySelector('h3');
 	//if box has been marked, raise alert
 	if(box.style.backgroundImage != ''){
@@ -48,7 +51,12 @@ function setPlayer(box, event){
 		//Make the box background the player's img
 		//check who player is, then switch to 'o' or 'x' player(pass the turn)
 		box.style.backgroundImage = player;
+		player === x? sword_count+=1 : cannon_count+=1;
 		playSound(player);
+		if (rand > .90){
+			alert("Mayhem! Looks like yer all shuffled up.")
+			mayhem();
+		}
 		if(hasWon(player)){
 			fillSkull();
 			updateBoard(player);
@@ -174,4 +182,30 @@ function updateBoard(player){
 	res_button.style.display = 'block';
 	document.querySelector('.cannon').innerHTML = o_score;
 	document.querySelector('.swords').innerHTML = x_score;
+}
+function mayhem(){
+	soft_reset();
+	for(var i=0;i<sword_count;i++){
+		sword_shuffle();
+	}
+	for(var j=0;j<cannon_count;j++){
+		cannon_shuffle();
+	}
+}
+function cannon_shuffle(){	
+	var position = Math.floor(Math.random()*9);
+	if(boxes[position].style.backgroundImage === ''){
+		boxes[position].style.backgroundImage = o;
+	}
+}
+function sword_shuffle(){
+	var position = Math.floor(Math.random()*9);
+	if(boxes[position].style.backgroundImage === ''){
+		boxes[position].style.backgroundImage = x;
+	}	
+}
+function soft_reset(){
+	for(var i=0; i<boxes.length;i++){
+		boxes[i].style.backgroundImage='';
+	}
 }
