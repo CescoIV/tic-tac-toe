@@ -2,7 +2,7 @@ var x_score = 0;
 var o_score = 0;
 var x = 'url("images/swords.png")';
 var o = 'url("images/cannonballs.png")';
-var skull = 'url("images/skull.jpg")'
+var skull = 'url("images/skull.png")'
 var player = x;
 var boxes = [...document.querySelectorAll('.box')];
 var res_button = document.querySelector('.reset')
@@ -40,13 +40,6 @@ function start(){
 
 function setPlayer(box, event){
 	var msg = document.querySelector('h3');
-	if(isFull() && hasWon(player)){
-		event.preventDefault();
-		document.querySelector('.winner').innerHTML =
-			"Draw! And here I thought y' was worth me trouble!"
-		msg.innerText = "Reset the game you Landlubber!";
-		res_button.style.display = "block";
-	}
 	//if box has been marked, raise alert
 	if(box.style.backgroundImage != ''){
 		event.preventDefault();
@@ -60,12 +53,17 @@ function setPlayer(box, event){
 			fillSkull();
 			updateBoard(player);
 			displayWinner(player);
+		}else if(isFull()){
+			event.preventDefault();
+			document.querySelector('.winner').innerHTML =
+				"Draw! And here I thought y' was worth me trouble!"
+			msg.innerText = "Reset the game you Landlubber!";
+			res_button.style.display = "block";
 		}
 		player === x ? player = o : player = x;
 		setText(player);
 		msg.innerText = '';	
 	}
-
 }
 function fillSkull(){
 	boxes.forEach((el)=>{

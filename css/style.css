@@ -1,79 +1,82 @@
-body{
-	margin: 0 auto;
-	background-image: url('../images/sea.gif');
-	background-size: cover;
-	animation: float 6s ease-in-out infinite;
-	color: white;
+@font-face{font-family: Pirate; src: url('../fonts/treasure-map.ttf');}
+body {
+	font-family: Pirate;
+	background-image:url(../images/sea.gif);
+	background-size:cover;
+	animation:float 6s ease-in-out infinite;
+	color:#FFF;
+	margin:0 auto;
 }
-h2, h3{
-	margin: 0;
-	text-align: center;
+h2,h3 {
+	text-align:center;
+	margin:0;
+	font-size: 40px;
 }
-.title{
-	margin: 0 30%;
+.title {
+	margin:0 33%;
 }
-.hoist{
-	height: 150px;
+.hoist {
+	height:150px;
 }
-
-
-.board{
-	width: 600px;
-	height: 600px;
-	display: flex;
-	flex-direction: row;
-	margin: 30px auto;
-
+.board {
+	width:600px;
+	height:600px;
+	display:flex;
+	flex-direction:row;
+	margin:30px auto;
 }
-.wood{
-	background-image: url('../images/board.png');
-	background-size: cover;
-	width: 620px;
+.wood {
+	background-image:url(../images/board.png);
+	background-size:cover;
+	width:620px;
 	height:620px;
-	margin: auto;
-	animation: float 6s ease-in-out infinite;
+	animation:float 6s ease-in-out infinite;
+	margin:auto;
 }
-.row{
-	flex: 1;
-	display: none;
+.row {
+	flex:1;
+	display:none;
 }
-.box{
-	width: 200px;
-	height: 200px;
-	background-color: rgba(114,76,38,0.5);
-	margin: 2px;
-	background-image: "";
-	background-size: cover;
+.box {
+	width:200px;
+	height:200px;
+	background-color:rgba(114,76,38,0.5);
+	background-size:cover;
+	margin:2px;
 }
-.box:hover{
-	background-color: rgba(114,76,38,0.9);
+.box:hover {
+	background-color:rgba(114,76,38,0.9);
 }
-.reset{
-	display: none;
-	margin: 0 auto;
-	height: 100px;
-	animation: float 6s ease-in-out infinite;
+.reset {
+	display:none;
+	height:100px;
+	animation:float 6s ease-in-out infinite;
+	margin:0 auto;
 }
-.start{
-	margin: auto;
+.start {
+	width:600px;
+	height:600px;
+	margin:auto;
 }
-.scoreboard{
-	width: 70px;
-	margin: 0 47.5%;
-	display: flex;
-	flex-direction: row;
+.start:hover {
+	content:url('../images/start_hover.png');
 }
-.s_score, .o_score{
+.scoreboard {
+	width:70px;
+	display:flex;
+	flex-direction:row;
+	margin:0 47.5%;
+}
+.s_score,.o_score {
 	flex:1;
 }
-.num{
-	font-size: 40px;
-	width: 50px;
+.num {
+	font-size:40px;
+	width:50px;
 }
-img.score{
-
-	width: 50px;
-	height: 50px;
+img.score {
+	width:50px;
+	height:50px;
 }
 @keyframes float {
 	0% {
