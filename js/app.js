@@ -191,6 +191,9 @@ function mayhem(){
 	for(var j=0;j<cannon_count;j++){
 		cannon_shuffle();
 	}
+
+	sword_count = 0;
+	cannon_count = 0;
 }
 function cannon_shuffle(){	
 	var position = Math.floor(Math.random()*9);
