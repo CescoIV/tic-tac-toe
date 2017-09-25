@@ -1,5 +1,8 @@
 body{
 /*	margin: 0 auto;*/
+	background-image: url('../images/sea.gif');
+	background-size: cover;
+	animation: float 6s ease-in-out infinite;
 }
 h1, h2, h3{
 	margin: 0;
@@ -14,6 +17,15 @@ h1{
 	display: flex;
 	flex-direction: row;
 	margin: 30px auto;
+
+}
+.wood{
+	background-image: url('../images/board.png');
+	background-size: cover;
+	width: 620px;
+	height:620px;
+	margin: auto;
+	animation: float 6s ease-in-out infinite;
 }
 .row{
 	flex: 1;
@@ -22,14 +34,19 @@ h1{
 .box{
 	width: 200px;
 	height: 200px;
-	background-color: red;
+	background-color: rgba(114,76,38,0.5);
 	margin: 2px;
 	background-image: "";
+	background-size: cover;
+}
+.box:hover{
+	background-color: rgba(114,76,38,0.9);
 }
 .reset{
 	display: none;
 	margin: 0 auto;
-	height: 50px;
+	height: 100px;
+	animation: float 6s ease-in-out infinite;
 }
 .start{
 	margin: auto;
@@ -51,4 +68,15 @@ img.score{
 
 	width: 50px;
 	height: 50px;
+}
+@keyframes float {
+	0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-20px);
+	}
+	100% {
+		transform: translatey(0px);
+	}
 }

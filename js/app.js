@@ -1,5 +1,3 @@
-// var a = [...document.querySelectorAll('.row')];
-
 var x_score = 0;
 var o_score = 0;
 var x = 'url("images/swords.png")';
@@ -9,7 +7,9 @@ var player = x;
 var boxes = [...document.querySelectorAll('.box')];
 var res_button = document.querySelector('.reset')
 var start_button = document.querySelector('.start');
+var audio = document.querySelector('#intro');
 
+window.onload = bgAudStart();
 start_button.addEventListener('click', start);
 
 res_button.addEventListener('click', function reset(){
@@ -23,7 +23,9 @@ res_button.addEventListener('click', function reset(){
 
 function start(){
 	var rows = [...document.querySelectorAll('.row')];
-	
+	audio.pause();
+	audio.currentTime =0;
+	loopAudStart();
 	start_button.style.display = 'none';
 	rows.forEach((el)=>{
 		el.style.display = 'block';
@@ -40,7 +42,6 @@ function setPlayer(box, event){
 	var msg = document.querySelector('h3');
 
 	//if box has been marked, raise alert
-
 	if(box.style.backgroundImage != ''){
 		event.preventDefault();
 		msg.innerText ="Click an empty spot matey!"
@@ -56,14 +57,14 @@ function setPlayer(box, event){
 		}
 		player === x ? player = o : player = x;
 		setText(player);
-		msg.innerText = '';	
-	}
-	if(isFull()){
-		event.preventDefault();
-		document.querySelector('.winner').innerHTML =
-			"Draw! And here I thought y' was worth me trouble!"
-		msg.innerText = "Reset the game you Landlubber!";
-		res_button.style.display = "block";
+		msg.innerText = '';
+		if(isFull()){
+			event.preventDefault();
+			document.querySelector('.winner').innerHTML =
+				"Draw! And here I thought y' was worth me trouble!"
+			msg.innerText = "Reset the game you Landlubber!";
+			res_button.style.display = "block";
+		}	
 	}
 }
 function fillSkull(){
@@ -150,6 +151,15 @@ function checkDiagDown(player){
 function playSound(player){
 	var audio = '';
 	player === x ? audio = document.querySelector('#sword') : audio = document.querySelector('#cannon');
+	audio.play();
+}
+function bgAudStart(){
+	audio = document.querySelector('#intro');
+	audio.play();
+	return audio; 
+}
+function loopAudStart(){
+	audio = document.querySelector('#loop');
 	audio.play();
 }
 function displayWinner(player){
