@@ -40,7 +40,13 @@ function start(){
 
 function setPlayer(box, event){
 	var msg = document.querySelector('h3');
-
+	if(isFull() && hasWon(player)){
+		event.preventDefault();
+		document.querySelector('.winner').innerHTML =
+			"Draw! And here I thought y' was worth me trouble!"
+		msg.innerText = "Reset the game you Landlubber!";
+		res_button.style.display = "block";
+	}
 	//if box has been marked, raise alert
 	if(box.style.backgroundImage != ''){
 		event.preventDefault();
@@ -57,15 +63,9 @@ function setPlayer(box, event){
 		}
 		player === x ? player = o : player = x;
 		setText(player);
-		msg.innerText = '';
-		if(isFull()){
-			event.preventDefault();
-			document.querySelector('.winner').innerHTML =
-				"Draw! And here I thought y' was worth me trouble!"
-			msg.innerText = "Reset the game you Landlubber!";
-			res_button.style.display = "block";
-		}	
+		msg.innerText = '';	
 	}
+
 }
 function fillSkull(){
 	boxes.forEach((el)=>{
